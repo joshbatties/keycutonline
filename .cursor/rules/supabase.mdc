@@ -1,0 +1,5 @@
+---
+alwaysApply: true
+---
+You have access to the Supabase MCP server tool. Please do not try to modify the database yourself. Instead, provide SQL snippets ready for execution in the Supabase SQL editor.
+You are working in the project joshbatties within the keycutonline schema. 
