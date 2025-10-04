@@ -1,6 +1,6 @@
 import { Resend } from "resend"
 
-const resend = new Resend(process.env.RESEND_API_KEY)
+const resend = new Resend(process.env.RESEND_API_KEY || "dummy-key-for-build")
 
 export async function sendEmail({
   to,
@@ -12,6 +12,12 @@ export async function sendEmail({
   html: string
 }) {
   try {
+    // Check if we have a valid API key
+    if (!process.env.RESEND_API_KEY || process.env.RESEND_API_KEY === "dummy-key-for-build") {
+      console.warn("Resend API key not configured, skipping email send")
+      return { success: false, error: "Email service not configured" }
+    }
+
     const data = await resend.emails.send({
       from: "KeyCut Online <noreply@keycut.com.au>",
       to,
